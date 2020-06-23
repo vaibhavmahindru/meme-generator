@@ -17,15 +17,22 @@ class Meme extends Component {
   }
 
   handleChange = (event) => {
-    const { name, value } = event.target;
+    const { name, value } = event.target; //takes out the value from event.target and store it in name and value
     this.setState({
       [name]: value,
     });
   };
+
+  handleSubmit = (event) => {
+    event.preventDefault(); //prevents the deafault function of the event.
+    const index = Math.floor(Math.random() * this.state.allMemeImages.length);
+    const randImg = this.state.allMemeImages[index].url;
+    this.setState({ randomImage: randImg });
+  };
   render() {
     return (
       <div className="meme">
-        <form className="meme-form">
+        <form className="meme-form" onSubmit={this.handleSubmit}>
           <input
             type="text"
             name="topText"
@@ -47,6 +54,16 @@ class Meme extends Component {
           <h2 className="top">{this.state.topText}</h2>
           <h2 className="bottom">{this.state.bottomText}</h2>
         </div>
+        <h2>
+          Click{" "}
+          <a
+            href="https://vaibhavmahindru.github.io/intro-page/"
+            target="blank"
+          >
+            HERE
+          </a>{" "}
+          for more intresting stuff!
+        </h2>
       </div>
     );
   }
